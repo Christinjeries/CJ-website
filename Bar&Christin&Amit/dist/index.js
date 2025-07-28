@@ -33,10 +33,12 @@ function renderProducts() {
     try {
         var topSalesContainer = document.getElementById("topSalesContainer");
         var sortPriceBtn = document.getElementById('sortByPrice');
+        var sortStockBtn = document.getElementById('sortByStock');
         if (!topSalesContainer)
             throw new Error("topSalesContainer element not found");
         topSalesContainer.innerHTML = products.map(function (product) { return htmlProduct(product); }).join('');
         sortPriceBtn.textContent = 'Sort by Price (Low to High)';
+        sortStockBtn.textContent = 'Sort by stock (Low to High)';
     }
     catch (error) {
         console.error("Error rendering products:", error);
@@ -64,6 +66,10 @@ function handleSortByPrice() {
     sortProductsByPrice(products);
     renderProducts();
 }
+function handleSortByStock() {
+    sortProductsByStock(products);
+    renderProducts();
+}
 //model function
 function addProduct(productsArray, productData) {
     var newProduct = {
@@ -80,10 +86,14 @@ function addProduct(productsArray, productData) {
 function sortProductsByPrice(productsArray) {
     productsArray.sort(function (a, b) { return a.Price - b.Price; });
 }
+function sortProductsByStock(productsArray) {
+    productsArray.sort(function (a, b) { return a.amountInStock - b.amountInStock; });
+}
 function initializeApp() {
     renderProducts();
     var addBtn = document.getElementById('addProductBtn');
     var sortPriceBtn = document.getElementById('sortByPrice');
+    var sortStockBtn = document.getElementById('sortByStock');
     if (addBtn) {
         addBtn.addEventListener('click', function (e) {
             e.preventDefault();
@@ -94,6 +104,12 @@ function initializeApp() {
         sortPriceBtn.addEventListener('click', function (e) {
             e.preventDefault();
             handleSortByPrice();
+        });
+    }
+    if (sortStockBtn) {
+        sortStockBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            handleSortByStock();
         });
     }
     console.log('Product management system initialized');
