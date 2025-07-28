@@ -7,30 +7,30 @@ interface Product {
     amountInStock: number;
 }
 let products: Product[] = [
-    // {
-    //     Id: 1,
-    //     Name: "adidas Originals ballet fine knit t-shirt in cream",
-    //     Price: 345,
-    //     Image: "./top3-1.jpeg",
-    //     InStock: true,
-    //     amountInStock: 100
-    // },
-    // {
-    //     Id: 2,
-    //     Name: "Beauty of Joseon Relief Rice & Probiotics Sun Cream SPF 50 50ml",
-    //     Price: 100,
-    //     Image: "./top3-2.jpeg",
-    //     InStock: true,
-    //     amountInStock: 50
-    // },
-    // {
-    //     Id: 3,
-    //     Name: "ASOS DESIGN slim oval sunglasses in tort",
-    //     Price: 80,
-    //     Image: "./top3-3.jpeg",
-    //     InStock: true,
-    //     amountInStock: 60
-    // }
+    {
+        Id: 1,
+        Name: "adidas Originals ballet fine knit t-shirt in cream",
+        Price: 345,
+        Image: "./top3-1.jpeg",
+        InStock: true,
+        amountInStock: 100
+    },
+    {
+        Id: 2,
+        Name: "Beauty of Joseon Relief Rice & Probiotics Sun Cream SPF 50 50ml",
+        Price: 100,
+        Image: "./top3-2.jpeg",
+        InStock: true,
+        amountInStock: 50
+    },
+    {
+        Id: 3,
+        Name: "ASOS DESIGN slim oval sunglasses in tort",
+        Price: 80,
+        Image: "./top3-3.jpeg",
+        InStock: true,
+        amountInStock: 60
+    }
 ];
 
 let nextId = 4;
@@ -67,9 +67,11 @@ function htmlProduct(product: Product): string {
 function renderProducts(): void {
     try {
         const topSalesContainer = document.getElementById("topSalesContainer");
+        const sortPriceBtn = document.getElementById('sortByPrice') as HTMLButtonElement;
         if (!topSalesContainer) throw new Error("topSalesContainer element not found");
 
         topSalesContainer.innerHTML = products.map(product => htmlProduct(product)).join('');
+        sortPriceBtn.textContent = 'Sort by Price (Low to High)';
 
         const deleteButton = topSalesContainer.querySelectorAll(".delete-button")
         deleteButton.forEach(button => {
@@ -111,6 +113,10 @@ function handleDeleteButton(id: number): void {
 }
 
 
+function handleSortByPrice(): void {
+    sortProductsByPrice(products);
+    renderProducts();
+}
 //model function
 function addProduct(productsArray: Product[], productData: Omit<Product, 'Id'>): Product {
     const newProduct: Product = {
@@ -125,11 +131,15 @@ function addProduct(productsArray: Product[], productData: Omit<Product, 'Id'>):
     productsArray.push(newProduct);
     return newProduct;
 }
+function sortProductsByPrice(productsArray: Product[]): void {
+    productsArray.sort((a, b) => a.Price - b.Price);
+}
 function initializeApp(): void {
 
     renderProducts();
 
     const addBtn = document.getElementById('addProductBtn') as HTMLButtonElement;
+    const sortPriceBtn = document.getElementById('sortByPrice') as HTMLButtonElement;
     if (addBtn) {
         addBtn.addEventListener('click', function (e: Event): void {
             e.preventDefault();
@@ -137,6 +147,13 @@ function initializeApp(): void {
         });
     }
 
+    if (sortPriceBtn) {
+        sortPriceBtn.addEventListener('click', function(e: Event): void {
+            e.preventDefault();
+            handleSortByPrice();
+        });
+    }
+    
     console.log('Product management system initialized');
 }
 document.addEventListener('DOMContentLoaded', initializeApp);

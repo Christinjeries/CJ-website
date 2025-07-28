@@ -48,11 +48,27 @@
         <div class="checkbox-container">
             <input type="checkbox" name="inStock" id="inStock" checked />
             <label for="inStock">In Stock</label>
+        <button class="btn btn-sort" id="sortByPrice" >Sort By Price</button>
+        <div class="topsales__top3" id="topSalesContainer"></div>
+
+        <div class="topsales__input">
+            <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+            <input type="text" name="name" id="name" placeholder="Product Name" />
+            <input type="number" name="price" id="price" placeholder="Price (ILS)" />
+            <div class="checkbox-container">
+                <input type="checkbox" name="inStock" id="inStock" checked />
+                <label for="inStock">In Stock</label>
+            </div>
+            <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
+            <button class="btn" id="addProductBtn">Add Product</button>
+            
         </div>
         <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
         <button class="btn" id="addProductBtn">Add Product</button>
         <button class="btn btn-update" id="updateProductBtn" style="display: none;">Update Product</button>
     </div>
+    
+
 </body>
 
 </html>
