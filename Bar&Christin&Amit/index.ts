@@ -6,7 +6,7 @@ interface Product {
     InStock: boolean;
     amountInStock: number;
 }
-const products: Product[] = [
+let products: Product[] = [
     {
         Id: 1,
         Name: "adidas Originals ballet fine knit t-shirt in cream",
@@ -39,13 +39,27 @@ let nextId = 4;
 function htmlProduct(product: Product): string {
     return `
         <div class="topsales__top3__item" data-product-id="${product.Id}">
-            <img src="${product.Image}" alt="${product.Name}"    
-            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;">${product.Name}</h3>
-            <p style="font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;">₪${product.Price}</p>
+            <img src="${product.Image}" alt="${product.Name}" />    
+
+            <h3 style="font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;">
+                ${product.Name}
+            </h3>
+
+            <p style="font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;">
+                ₪${product.Price}
+            </p>
+
             <p style="font-size: 14px; color: ${product.InStock ? '#28a745' : '#dc3545'}; margin-bottom: 5px;">
                 ${product.InStock ? '✓ In Stock' : '✗ Out of Stock'}
             </p>
-            <p style="font-size: 14px; color: #666;">Quantity: ${product.amountInStock}</p>
+
+            <button class="delete-button" data-id="${product.Id}">
+                ❌ Delete
+            </button>
+
+            <p style="font-size: 14px; color: #666;">
+                Quantity: ${product.amountInStock}
+            </p>
         </div>
     `;
 }
@@ -62,6 +76,14 @@ function renderProducts(): void {
         sortPriceBtn.textContent = 'Sort by Price (Low to High)';
         sortStockBtn.textContent = 'Sort by stock (Low to High)';
 
+        const deleteButton = topSalesContainer.querySelectorAll(".delete-button")
+        deleteButton.forEach(button => {
+            button.addEventListener('click', () => {
+                const id = parseInt((button as HTMLElement).dataset.id || "");
+                handleDeleteButton(id);
+            })
+        })
+
     } catch (error) {
         console.error("Error rendering products:", error);
     }
@@ -76,9 +98,9 @@ function handleAddProduct(): void {
     const quantityElement = document.getElementById('quantity') as HTMLInputElement;
 
     const productData = {
-        Name: nameElement.value,           
+        Name: nameElement.value,
         Price: parseFloat(priceElement.value),
-        Image: imageUrlElement.value,      
+        Image: imageUrlElement.value,
         InStock: inStockElement.checked,
         amountInStock: parseInt(quantityElement.value),
     };
@@ -87,6 +109,13 @@ function handleAddProduct(): void {
     console.log('Added product:', newProduct);
     renderProducts();
 }
+
+function handleDeleteButton(id: number): void {
+    products = products.filter(p => p.Id !== id);
+    renderProducts();
+}
+
+
 function handleSortByPrice(): void {
     sortProductsByPrice(products);
     renderProducts();
@@ -105,7 +134,7 @@ function addProduct(productsArray: Product[], productData: Omit<Product, 'Id'>):
         InStock: productData.InStock,
         amountInStock: productData.amountInStock
     };
-    
+
     productsArray.push(newProduct);
     return newProduct;
 }
@@ -116,19 +145,20 @@ function sortProductsByStock(productsArray: Product[]): void {
     productsArray.sort((a, b) => a.amountInStock - b.amountInStock);
 }
 function initializeApp(): void {
-    
+
     renderProducts();
-    
+
     const addBtn = document.getElementById('addProductBtn') as HTMLButtonElement;
     const sortPriceBtn = document.getElementById('sortByPrice') as HTMLButtonElement;
     const sortStockBtn = document.getElementById('sortByStock') as HTMLButtonElement;
 
     if (addBtn) {
-        addBtn.addEventListener('click', function(e: Event): void {
+        addBtn.addEventListener('click', function (e: Event): void {
             e.preventDefault();
             handleAddProduct();
         });
     }
+
     if (sortPriceBtn) {
         sortPriceBtn.addEventListener('click', function(e: Event): void {
             e.preventDefault();
