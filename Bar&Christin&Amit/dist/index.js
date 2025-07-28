@@ -27,16 +27,18 @@ var products = [
 var nextId = 4;
 //view function
 function htmlProduct(product) {
-    return "\n        <div class=\"topsales__top3__item\" data-product-id=\"" + product.Id + "\">\n            <img src=\"" + product.Image + "\" alt=\"" + product.Name + "\" />    \n\n            <h3 style=\"font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;\">\n                " + product.Name + "\n            </h3>\n\n            <p style=\"font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;\">\n                \u20AA" + product.Price + "\n            </p>\n\n            <p style=\"font-size: 14px; color: " + (product.InStock ? '#28a745' : '#dc3545') + "; margin-bottom: 5px;\">\n                " + (product.InStock ? '✓ In Stock' : '✗ Out of Stock') + "\n            </p>\n\n            \n            <p style=\"font-size: 14px; color: #666;\">\n            Quantity: " + product.amountInStock + "\n            </p>\n            \n            <button class=\"delete-button\" data-id=\"" + product.Id + "\">\n                \u274C Delete\n            </button>\n        </div>\n    ";
+    return "\n        <div class=\"topsales__top3__item\" data-product-id=\"" + product.Id + "\">\n            <img src=\"" + product.Image + "\" alt=\"" + product.Name + "\" />    \n\n            <h3 style=\"font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;\">\n                " + product.Name + "\n            </h3>\n\n            <p style=\"font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;\">\n                \u20AA" + product.Price + "\n            </p>\n\n            <p style=\"font-size: 14px; color: " + (product.InStock ? '#28a745' : '#dc3545') + "; margin-bottom: 5px;\">\n                " + (product.InStock ? '✓ In Stock' : '✗ Out of Stock') + "\n            </p>\n\n            \n            <p style=\"font-size: 14px; color: #666;\">\n            Quantity: " + product.amountInStock + "\n            </p>\n\n            <button class=\"delete-button\" data-id=\"" + product.Id + "\">\n                \u274C Delete\n            </button>\n        </div>\n    ";
 }
 function renderProducts() {
     try {
         var topSalesContainer = document.getElementById("topSalesContainer");
         var sortPriceBtn = document.getElementById('sortByPrice');
+        var sortStockBtn = document.getElementById('sortByStock');
         if (!topSalesContainer)
             throw new Error("topSalesContainer element not found");
         topSalesContainer.innerHTML = products.map(function (product) { return htmlProduct(product); }).join('');
         sortPriceBtn.textContent = 'Sort by Price (Low to High)';
+        sortStockBtn.textContent = 'Sort by stock (Low to High)';
         var deleteButtons = topSalesContainer.querySelectorAll(".delete-button");
         deleteButtons.forEach(function (button) {
             button.addEventListener('click', function () {
@@ -75,6 +77,10 @@ function handleSortByPrice() {
     sortProductsByPrice(products);
     renderProducts();
 }
+function handleSortByStock() {
+    sortProductsByStock(products);
+    renderProducts();
+}
 //model function
 function addProduct(productsArray, productData) {
     var newProduct = {
@@ -91,10 +97,14 @@ function addProduct(productsArray, productData) {
 function sortProductsByPrice(productsArray) {
     productsArray.sort(function (a, b) { return a.Price - b.Price; });
 }
+function sortProductsByStock(productsArray) {
+    productsArray.sort(function (a, b) { return a.amountInStock - b.amountInStock; });
+}
 function initializeApp() {
     renderProducts();
     var addBtn = document.getElementById('addProductBtn');
     var sortPriceBtn = document.getElementById('sortByPrice');
+    var sortStockBtn = document.getElementById('sortByStock');
     if (addBtn) {
         addBtn.addEventListener('click', function (e) {
             e.preventDefault();
@@ -105,6 +115,12 @@ function initializeApp() {
         sortPriceBtn.addEventListener('click', function (e) {
             e.preventDefault();
             handleSortByPrice();
+        });
+    }
+    if (sortStockBtn) {
+        sortStockBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            handleSortByStock();
         });
     }
     console.log('Product management system initialized');

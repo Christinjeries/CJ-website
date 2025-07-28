@@ -178,7 +178,16 @@
     
     
 }
-.btn-sort {
+.btn-sortprice {
+    background-color: #28a745 ;
+    color: white ;
+    margin-left: 10px;
+    
+    &:hover {
+      background-color: #218838 ;
+    }
+  }
+  .btn-sortstock {
     background-color: #28a745 ;
     color: white ;
     margin-left: 10px;
