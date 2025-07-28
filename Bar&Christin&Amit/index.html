@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="./dist/style.css">
     <script src="./dist/index.js" defer></script>
 </head>
+
 <body>
     <div class="discount">Up to 50% off Discount By CJ products</div>
 
@@ -34,23 +36,23 @@
         <div class="categories__collection">Shoes</div>
         <div class="categories__collection">Brands</div>
     </div>
-
     <div class="topsales">
         <div class="topsales__header">Top Three Sales</div>
-        <div class="topsales__top3" id="topSalesContainer"></div>
+        <div id="topSalesContainer" class="topsales__top3"></div>
+    </div>
 
-        <div class="topsales__input">
-            <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
-            <input type="text" name="name" id="name" placeholder="Product Name" />
-            <input type="number" name="price" id="price" placeholder="Price (ILS)" />
-            <div class="checkbox-container">
-                <input type="checkbox" name="inStock" id="inStock" checked />
-                <label for="inStock">In Stock</label>
-            </div>
-            <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
-            <button class="btn" id="addProductBtn">Add Product</button>
-            <button class="btn btn-update" id="updateProductBtn" style="display: none;">Update Product</button>
+    <div class="topsales__input">
+        <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+        <input type="text" name="name" id="name" placeholder="Product Name" />
+        <input type="number" name="price" id="price" placeholder="Price (ILS)" />
+        <div class="checkbox-container">
+            <input type="checkbox" name="inStock" id="inStock" checked />
+            <label for="inStock">In Stock</label>
         </div>
+        <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
+        <button class="btn" id="addProductBtn">Add Product</button>
+        <button class="btn btn-update" id="updateProductBtn" style="display: none;">Update Product</button>
     </div>
 </body>
+
 </html>
