@@ -79,10 +79,10 @@
 .categories__collection:hover {
   background-color: #333;
 }
-.categories__collection--highlight {
+.categories__highlight {
   color: #ffe602;
 }
-.categories__collection--highlight:hover {
+.categories__highlight:hover {
   background-color: #555;
 }
 
@@ -155,18 +155,11 @@
   background-color: #0056b3;
 }
 
-<<<<<<< HEAD
-.btn-sort {
-=======
 .btn-sortprice {
->>>>>>> e88b22fde507071c4e9bc2dbcd8b5c8d4bab9a89
   background-color: #28a745;
   color: white;
   margin-left: 10px;
 }
-<<<<<<< HEAD
-.btn-sort:hover {
-=======
 .btn-sortprice:hover {
   background-color: #218838;
 }
@@ -177,6 +170,5 @@
   margin-left: 10px;
 }
 .btn-sortstock:hover {
->>>>>>> e88b22fde507071c4e9bc2dbcd8b5c8d4bab9a89
   background-color: #218838;
 }
