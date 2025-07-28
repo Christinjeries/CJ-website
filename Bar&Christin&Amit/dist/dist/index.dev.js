@@ -31,10 +31,12 @@ function htmlProduct(product) {
 function renderProducts() {
   try {
     var topSalesContainer = document.getElementById("topSalesContainer");
+    var sortPriceBtn = document.getElementById('sortByPrice');
     if (!topSalesContainer) throw new Error("topSalesContainer element not found");
     topSalesContainer.innerHTML = products.map(function (product) {
       return htmlProduct(product);
     }).join('');
+    sortPriceBtn.textContent = 'Sort by Price (Low to High)';
   } catch (error) {
     console.error("Error rendering products:", error);
   }
@@ -57,6 +59,11 @@ function handleAddProduct() {
   var newProduct = addProduct(products, productData);
   console.log('Added product:', newProduct);
   renderProducts();
+}
+
+function handleSortByPrice() {
+  sortProductsByPrice(products);
+  renderProducts();
 } //model function
 
 
@@ -73,14 +80,28 @@ function addProduct(productsArray, productData) {
   return newProduct;
 }
 
+function sortProductsByPrice(productsArray) {
+  productsArray.sort(function (a, b) {
+    return a.Price - b.Price;
+  });
+}
+
 function initializeApp() {
   renderProducts();
   var addBtn = document.getElementById('addProductBtn');
+  var sortPriceBtn = document.getElementById('sortByPrice');
 
   if (addBtn) {
     addBtn.addEventListener('click', function (e) {
       e.preventDefault();
       handleAddProduct();
+    });
+  }
+
+  if (sortPriceBtn) {
+    sortPriceBtn.addEventListener('click', function (e) {
+      e.preventDefault();
+      handleSortByPrice();
     });
   }
 

@@ -53,9 +53,11 @@ function htmlProduct(product: Product): string {
 function renderProducts(): void {
     try {
         const topSalesContainer = document.getElementById("topSalesContainer");
+        const sortPriceBtn = document.getElementById('sortByPrice') as HTMLButtonElement;
         if (!topSalesContainer) throw new Error("topSalesContainer element not found");
 
         topSalesContainer.innerHTML = products.map(product => htmlProduct(product)).join('');
+        sortPriceBtn.textContent = 'Sort by Price (Low to High)';
 
     } catch (error) {
         console.error("Error rendering products:", error);
@@ -82,6 +84,10 @@ function handleAddProduct(): void {
     console.log('Added product:', newProduct);
     renderProducts();
 }
+function handleSortByPrice(): void {
+    sortProductsByPrice(products);
+    renderProducts();
+}
 //model function
 function addProduct(productsArray: Product[], productData: Omit<Product, 'Id'>): Product {
     const newProduct: Product = {
@@ -96,15 +102,25 @@ function addProduct(productsArray: Product[], productData: Omit<Product, 'Id'>):
     productsArray.push(newProduct);
     return newProduct;
 }
+function sortProductsByPrice(productsArray: Product[]): void {
+    productsArray.sort((a, b) => a.Price - b.Price);
+}
 function initializeApp(): void {
     
     renderProducts();
     
     const addBtn = document.getElementById('addProductBtn') as HTMLButtonElement;
+    const sortPriceBtn = document.getElementById('sortByPrice') as HTMLButtonElement;
     if (addBtn) {
         addBtn.addEventListener('click', function(e: Event): void {
             e.preventDefault();
             handleAddProduct();
+        });
+    }
+    if (sortPriceBtn) {
+        sortPriceBtn.addEventListener('click', function(e: Event): void {
+            e.preventDefault();
+            handleSortByPrice();
         });
     }
     
