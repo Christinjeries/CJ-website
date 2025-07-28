@@ -53,13 +53,14 @@ function htmlProduct(product: Product): string {
                 ${product.InStock ? '✓ In Stock' : '✗ Out of Stock'}
             </p>
 
+            
+            <p style="font-size: 14px; color: #666;">
+            Quantity: ${product.amountInStock}
+            </p>
+            
             <button class="delete-button" data-id="${product.Id}">
                 ❌ Delete
             </button>
-
-            <p style="font-size: 14px; color: #666;">
-                Quantity: ${product.amountInStock}
-            </p>
         </div>
     `;
 }
@@ -73,8 +74,8 @@ function renderProducts(): void {
         topSalesContainer.innerHTML = products.map(product => htmlProduct(product)).join('');
         sortPriceBtn.textContent = 'Sort by Price (Low to High)';
 
-        const deleteButton = topSalesContainer.querySelectorAll(".delete-button")
-        deleteButton.forEach(button => {
+        const deleteButtons = topSalesContainer.querySelectorAll(".delete-button")
+        deleteButtons.forEach(button => {
             button.addEventListener('click', () => {
                 const id = parseInt((button as HTMLElement).dataset.id || "");
                 handleDeleteButton(id);
@@ -148,12 +149,12 @@ function initializeApp(): void {
     }
 
     if (sortPriceBtn) {
-        sortPriceBtn.addEventListener('click', function(e: Event): void {
+        sortPriceBtn.addEventListener('click', function (e: Event): void {
             e.preventDefault();
             handleSortByPrice();
         });
     }
-    
+
     console.log('Product management system initialized');
 }
 document.addEventListener('DOMContentLoaded', initializeApp);

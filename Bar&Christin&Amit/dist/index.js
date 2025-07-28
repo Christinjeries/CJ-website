@@ -27,7 +27,7 @@ var products = [
 var nextId = 4;
 //view function
 function htmlProduct(product) {
-    return "\n        <div class=\"topsales__top3__item\" data-product-id=\"" + product.Id + "\">\n            <img src=\"" + product.Image + "\" alt=\"" + product.Name + "\"    \n            <h3 style=\"font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;\">" + product.Name + "</h3>\n            <p style=\"font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;\">\u20AA" + product.Price + "</p>\n            <p style=\"font-size: 14px; color: " + (product.InStock ? '#28a745' : '#dc3545') + "; margin-bottom: 5px;\">\n                " + (product.InStock ? '✓ In Stock' : '✗ Out of Stock') + "\n            </p>\n            <p style=\"font-size: 14px; color: #666;\">Quantity: " + product.amountInStock + "</p>\n        </div>\n    ";
+    return "\n        <div class=\"topsales__top3__item\" data-product-id=\"" + product.Id + "\">\n            <img src=\"" + product.Image + "\" alt=\"" + product.Name + "\" />    \n\n            <h3 style=\"font-size: 18px; font-weight: bold; margin-bottom: 8px; color: #333;\">\n                " + product.Name + "\n            </h3>\n\n            <p style=\"font-size: 16px; color: #007bff; font-weight: bold; margin-bottom: 8px;\">\n                \u20AA" + product.Price + "\n            </p>\n\n            <p style=\"font-size: 14px; color: " + (product.InStock ? '#28a745' : '#dc3545') + "; margin-bottom: 5px;\">\n                " + (product.InStock ? '✓ In Stock' : '✗ Out of Stock') + "\n            </p>\n\n            \n            <p style=\"font-size: 14px; color: #666;\">\n            Quantity: " + product.amountInStock + "\n            </p>\n            \n            <button class=\"delete-button\" data-id=\"" + product.Id + "\">\n                \u274C Delete\n            </button>\n        </div>\n    ";
 }
 function renderProducts() {
     try {
@@ -37,6 +37,13 @@ function renderProducts() {
             throw new Error("topSalesContainer element not found");
         topSalesContainer.innerHTML = products.map(function (product) { return htmlProduct(product); }).join('');
         sortPriceBtn.textContent = 'Sort by Price (Low to High)';
+        var deleteButtons = topSalesContainer.querySelectorAll(".delete-button");
+        deleteButtons.forEach(function (button) {
+            button.addEventListener('click', function () {
+                var id = parseInt(button.dataset.id || "");
+                handleDeleteButton(id);
+            });
+        });
     }
     catch (error) {
         console.error("Error rendering products:", error);
@@ -58,6 +65,10 @@ function handleAddProduct() {
     };
     var newProduct = addProduct(products, productData);
     console.log('Added product:', newProduct);
+    renderProducts();
+}
+function handleDeleteButton(id) {
+    products = products.filter(function (p) { return p.Id !== id; });
     renderProducts();
 }
 function handleSortByPrice() {

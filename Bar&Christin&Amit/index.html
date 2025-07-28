@@ -2,73 +2,62 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CJ website</title>
-    <link rel="stylesheet" href="./dist/style.css">
-    <script src="./dist/index.js" defer></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CJ Website</title>
+  <link rel="stylesheet" href="./dist/style.css" />
+  <script src="./dist/index.js" defer></script>
 </head>
 
 <body>
-    <div class="discount">Up to 50% off Discount By CJ products</div>
+  <div class="discount">Up to 50% off Discount By CJ products</div>
 
-    <div class="navigation">
-        <div class="navigation__logo">
-            <img src="./logo.png" alt="logo image">
-        </div>
-        <div class="navigation__search"> Search...</div>
-        <div class="navigation__personal">👤</div>
-        <div class="navigation__personal">🤍</div>
-        <div class="navigation__personal">🛒</div>
-        <div class="navigation__location">🇮🇱 EN</div>
-        <div class="navigation__location">|</div>
-        <div class="navigation__location">ILS</div>
+  <div class="navigation">
+    <div class="navigation__logo">
+      <img src="./logo.png" alt="logo image" />
     </div>
+    <div class="navigation__search">Search...</div>
+    <div class="navigation__personal">👤</div>
+    <div class="navigation__personal">🤍</div>
+    <div class="navigation__personal">🛒</div>
+    <div class="navigation__location">🇮🇱 EN</div>
+    <div class="navigation__location">|</div>
+    <div class="navigation__location">ILS</div>
+  </div>
 
-    <div class="categories">
-        <div class="categories__collection">Girls</div>
-        <div class="categories__collection">Boys</div>
-        <div class="categories__collection">Baby</div>
-        <div class="categories__collection">Women</div>
-        <div class="categories__collection">Men</div>
-        <div class="categories__collection__highlight">SUMMER BLOWOUT SALE!</div>
-        <div class="categories__ollection">Accessories</div>
-        <div class="categories__collection">Shoes</div>
-        <div class="categories__collection">Brands</div>
-    </div>
-    <div class="topsales">
-        <div class="topsales__header">Top Three Sales</div>
-        <div id="topSalesContainer" class="topsales__top3"></div>
-    </div>
+  <div class="categories">
+    <div class="categories__collection">Girls</div>
+    <div class="categories__collection">Boys</div>
+    <div class="categories__collection">Baby</div>
+    <div class="categories__collection">Women</div>
+    <div class="categories__collection">Men</div>
+    <div class="categories__collection__highlight">SUMMER BLOWOUT SALE!</div>
+    <div class="categories__collection">Accessories</div>
+    <div class="categories__collection">Shoes</div>
+    <div class="categories__collection">Brands</div>
+  </div>
 
-    <div class="topsales__input">
-        <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
-        <input type="text" name="name" id="name" placeholder="Product Name" />
-        <input type="number" name="price" id="price" placeholder="Price (ILS)" />
-        <div class="checkbox-container">
-            <input type="checkbox" name="inStock" id="inStock" checked />
-            <label for="inStock">In Stock</label>
-        <button class="btn btn-sort" id="sortByPrice" >Sort By Price</button>
-        <div class="topsales__top3" id="topSalesContainer"></div>
+  <div class="topsales">
+    <div class="topsales__header">Top Three Sales</div>
+    <div class="topsales__top3" id="topSalesContainer"></div>
+  </div>
 
-        <div class="topsales__input">
-            <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
-            <input type="text" name="name" id="name" placeholder="Product Name" />
-            <input type="number" name="price" id="price" placeholder="Price (ILS)" />
-            <div class="checkbox-container">
-                <input type="checkbox" name="inStock" id="inStock" checked />
-                <label for="inStock">In Stock</label>
-            </div>
-            <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
-            <button class="btn" id="addProductBtn">Add Product</button>
-            
-        </div>
-        <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
-        <button class="btn" id="addProductBtn">Add Product</button>
-        <button class="btn btn-update" id="updateProductBtn" style="display: none;">Update Product</button>
+  <div class="topsales__input">
+    <input type="url" name="imageUrl" id="imageUrl" placeholder="Image URL" />
+    <input type="text" name="name" id="name" placeholder="Product Name" />
+    <input type="number" name="price" id="price" placeholder="Price (ILS)" />
+    <div class="checkbox-container">
+      <input type="checkbox" name="inStock" id="inStock" checked />
+      <label for="inStock">In Stock</label>
     </div>
+    <input type="number" name="quantity" id="quantity" placeholder="Quantity in Stock" />
     
-
+    <div class="topsales__buttons">
+      <button class="btn" id="addProductBtn">Add Product</button>
+      <button class="btn btn-update" id="updateProductBtn" style="display: none;">Update Product</button>
+      <button class="btn btn-sort" id="sortByPrice">Sort By Price</button>
+    </div>
+  </div>
 </body>
 
 </html>
